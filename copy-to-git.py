@@ -12,12 +12,14 @@ destination = 'C:/Users/むずでょ/Documents/GitHub/tororo-go-js'
 def go():
     print('Trace   | Remove.')
     remove_destination_dir('/src')
+    remove_destination_dir('/tool')
     remove_destination_file('/copy-to-git.py')
     remove_destination_file('/LICENSE')
     remove_destination_file('/README.md')
 
     print('Trace   | Copy.')
     copy_dir('/src')
+    copy_dir('/tool')
     copy_file('/copy-to-git.py')
     copy_file('/LICENSE')
     copy_file('/README.md')
