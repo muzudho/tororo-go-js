@@ -37,31 +37,32 @@ oox....xxxoo./
     print(f'white_cake_board = {white_cake_board}')
     print_cake_board(white_stone_board, white_cake_board)
 
-    def print_conv_board(conv_board, color):
-        for i, corners in enumerate(conv_board):
+    def print_conv_board(corners_board, color):
+        for i, corners in enumerate(corners_board):
             #print(f'i={i} corners={corners}')
-            if 1 < corners:
-                if color == 'black':
-                    print('<img src="img/b.png">', end='')
-                elif color == 'white':
-                    print('<img src="img/w.png">', end='')
-                else:
-                    raise f'Invalid color={color}'
+            if corners == 1:
+                print('<img src="img/1.png">', end='')
+            elif corners == 2:
+                print('<img src="img/2.png">', end='')
+            elif corners == 3:
+                print('<img src="img/3.png">', end='')
+            elif corners == 4:
+                print('<img src="img/4.png">', end='')
             else:
-                print('<img src="img/s.png">', end='')
+                print('<img src="img/_.png">', end='')
 
             if i % 12 == 11:
                 print('<br>')
 
         print('')  # New line.
 
-    print('Trace   | Black cake.')
-    conv_board = convolute(black_cake_board)
-    print_conv_board(conv_board, 'black')
+    print('Trace   | Black cake cover.')
+    corners_board = convolute(black_cake_board)
+    print_conv_board(corners_board, 'black')
 
-    print('Trace   | White cake.')
-    conv_board = convolute(white_cake_board)
-    print_conv_board(conv_board, 'white')
+    print('Trace   | White cake cover.')
+    corners_board = convolute(white_cake_board)
+    print_conv_board(corners_board, 'white')
 
     print('Trace   | Finished.')
 
@@ -70,8 +71,9 @@ def coordinate_cover():
     return (-180, -20)
 
 
-def convolute(sticky_rice_cake_board):
-    #print(f'len(sticky_rice_cake_board): {len(sticky_rice_cake_board)}')
+def convolute(cake_board):
+    print(f'len(cake_board): {len(cake_board)}')
+    print(f'cake_board: {cake_board}')
     #corner_table = corner_number_table()
     #print(f'corner_table: {corner_table}')
     #print(f'len(corner_table): {len(corner_table)}')
@@ -84,21 +86,33 @@ def convolute(sticky_rice_cake_board):
         for col in range(0, cols):
             adr = address(row, col)
             sum = 0
+            # +------+
+            # |      |
+            # |    08|
+            # +------+
             # 左上タイルの右下コーナー
-            # print(f'num a: {adr} {sticky_rice_cake_board[adr]:02X} {sticky_rice_cake_board[adr]//0x10}')
-            if sticky_rice_cake_board[adr] & 0x01:
+            if cake_board[adr] & 0x08:
                 sum += 1
-            # print(
-            #    f'num b: {adr+1} {sticky_rice_cake_board[adr+1]:02X} {sticky_rice_cake_board[adr+1]//0x10}')
-            if sticky_rice_cake_board[adr+1] & 0x02:
+            # +------+
+            # |      |
+            # |04    |
+            # +------+
+            # 右上タイルの左下コーナー
+            if cake_board[adr+1] & 0x04:
                 sum += 1
-            # print(
-            #    f'num c: {adr+13} {sticky_rice_cake_board[adr+13]:02X} {sticky_rice_cake_board[adr+13]//0x10}')
-            if sticky_rice_cake_board[adr+13] & 0x04:
+            # +------+
+            # |    01|
+            # |      |
+            # +------+
+            # 左下タイルの右上コーナー
+            if cake_board[adr+13] & 0x01:
                 sum += 1
-            # print(
-            #    f'num d: {adr+14} {sticky_rice_cake_board[adr+14]:02X} {sticky_rice_cake_board[adr+14]//0x10}')
-            if sticky_rice_cake_board[adr+14] & 0x08:
+            # +------+
+            # |02    |
+            # |      |
+            # +------+
+            # 右下タイルの左上コーナー
+            if cake_board[adr+14] & 0x02:
                 sum += 1
             result.append(sum)
 

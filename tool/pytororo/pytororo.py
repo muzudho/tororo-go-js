@@ -107,7 +107,7 @@ def sticky_rice_cake(board: str, index, stone):
         under += 0x20
 
     # 北東
-    if 0 <= index-12 < 12 and board[index-12] == stone and col != 12 and row != 0:
+    if 0 <= index-12 and board[index-12] == stone and col != 12 and row != 0:
         cover += 0x01
 
     # 西
@@ -128,6 +128,6 @@ def sticky_rice_cake(board: str, index, stone):
 
     # 南東
     if index + 14 < len(board) and board[index+14] == stone and col != 12 and row != 12:
-        cover += 0x8
+        cover += 0x08
 
     return (under, cover)
