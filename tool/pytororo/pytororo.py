@@ -131,3 +131,23 @@ def sticky_rice_cake(board: str, index, stone):
         cover += 0x08
 
     return (under, cover)
+
+
+def print_conv_board(corners_board, color):
+    for i, corners in enumerate(corners_board):
+        #print(f'i={i} corners={corners}')
+        if corners == 1:
+            print('<img src="img/1.png">', end='')
+        elif corners == 2:
+            print('<img src="img/2.png">', end='')
+        elif corners == 3:
+            print('<img src="img/3.png">', end='')
+        elif corners == 4:
+            print('<img src="img/4.png">', end='')
+        else:
+            print('<img src="img/_.png">', end='')
+
+        if i % 12 == 11:
+            print('<br>')
+
+    print('')  # New line.

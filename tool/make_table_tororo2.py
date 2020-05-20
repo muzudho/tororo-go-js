@@ -37,17 +37,18 @@ oox....xxxoo./
     print(f'white_cake_board = {white_cake_board}')
     print_cake_board(white_stone_board, white_cake_board)
 
-    def print_conv_board(corners_board, color):
+    def print_cake_cover(corners_board, color):
         for i, corners in enumerate(corners_board):
-            #print(f'i={i} corners={corners}')
-            if corners == 1:
-                print('<img src="img/1.png">', end='')
-            elif corners == 2:
-                print('<img src="img/2.png">', end='')
-            elif corners == 3:
-                print('<img src="img/3.png">', end='')
-            elif corners == 4:
-                print('<img src="img/4.png">', end='')
+            if corners == 4:
+                under_p = coordinate_cover()
+                if color == 'black':
+                    print(
+                        f'<img src="img/black-stone.png" style="object-fit: none; object-position:{under_p[0]}px {under_p[1]}px; width:40px; height:40px;">', end='')
+                elif color == 'white':
+                    print(
+                        f'<img src="img/white-stone.png" style="object-fit: none; object-position:{under_p[0]}px {under_p[1]}px; width:40px; height:40px;">', end='')
+                else:
+                    raise f'Invalid color={color}'
             else:
                 print('<img src="img/_.png">', end='')
 
@@ -58,11 +59,11 @@ oox....xxxoo./
 
     print('Trace   | Black cake cover.')
     corners_board = convolute(black_cake_board)
-    print_conv_board(corners_board, 'black')
+    print_cake_cover(corners_board, 'black')
 
     print('Trace   | White cake cover.')
     corners_board = convolute(white_cake_board)
-    print_conv_board(corners_board, 'white')
+    print_cake_cover(corners_board, 'white')
 
     print('Trace   | Finished.')
 
