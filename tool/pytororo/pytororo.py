@@ -1,4 +1,52 @@
-def coordinate_under(num):
+def stone_board(board):
+    return board.replace(' ', '').replace('\n', '').replace('/', '')
+
+
+def black_stone(stone_board):
+    return stone_board.replace('o', '.')
+
+
+def white_stone(stone_board):
+    return stone_board.replace('x', '.')
+
+
+def print_stone_board(stone_board):
+    for stone in stone_board:
+        if stone == '.':
+            print('<img src="img/s.png">', end='')
+        elif stone == "x":
+            print('<img src="img/b.png">', end='')
+        elif stone == "o":
+            print('<img src="img/w.png">', end='')
+        elif stone == "/":
+            print('<br>')
+        elif stone == " " or stone == "\n":
+            pass
+        else:
+            print(f"[{stone}]?", end='')
+
+    print()  # New line.
+
+
+def print_cake_board(cake_board):
+    """餅の色情報は持てません。
+    """
+    for i, cake in enumerate(cake_board):
+        if cake == 0:
+            print('<img src="img/s.png">', end='')
+        else:
+            # print(f'i={i} cake={cake:02X} {cake//0x10:02X}')
+            under_p = coordinate_under(cake)
+            print(
+                f'<img src="img/gray-stone.png" style="object-fit: none; object-position:{under_p[0]}px {under_p[1]}px; width:40px; height:40px;">', end='')
+
+        if i % 13 == 12:
+            print('<br>')
+
+    print('')  # New line.
+
+
+def coordinate_under(cake):
     arr = [
         [0, 0],  # 0
         [-40, 0],  # 1
@@ -16,17 +64,17 @@ def coordinate_under(num):
         [-80, -40],  # D
         [-120, -80],  # E
         [-80, -80]]  # F
-    return arr[num//0x10]
+    return arr[cake//0x10]
 
 
-def sticky_rice_cake_board(board_array):
+def sticky_rice_cake_board(stone_board):
     """餅盤を作ります。"""
     result = []
 
-    for i, stone in enumerate(board_array):
-        under, cover = sticky_rice_cake(board_array, i, stone)
-        print(
-            f'i={i} stone={stone} sticky_rice_cake={under+cover:02X} under={under} cover={cover}')
+    for i, stone in enumerate(stone_board):
+        under, cover = sticky_rice_cake(stone_board, i, stone)
+        # print(
+        #    f'i={i} stone={stone} sticky_rice_cake={under+cover:02X} under={under} cover={cover}')
         result.append(under+cover)
 
     return result

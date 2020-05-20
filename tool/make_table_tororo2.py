@@ -1,4 +1,4 @@
-from pytororo.pytororo import sticky_rice_cake, sticky_rice_cake_board
+from pytororo.pytororo import stone_board, black_stone, white_stone, sticky_rice_cake, sticky_rice_cake_board, print_stone_board, print_cake_board
 
 
 def go():
@@ -20,22 +20,49 @@ oox....xxxoo./
 .o.........../
     """
 
-    board_array = board.replace(' ', '').replace('\n', '').replace('/', '')
-    n_board = sticky_rice_cake_board(board_array)
-    print(f'n_board: {n_board}')
-    conv_board = convolute(n_board)
+    stone_board1 = stone_board(board)
+    black_stone_board = black_stone(stone_board1)
+    print(f'black_stone_board = {black_stone_board}')
+    print_stone_board(black_stone_board)
 
-    for i, corners in enumerate(conv_board):
-        #print(f'i={i} corners={corners}')
-        if 1 < corners:
-            print('<img src="img/b.png">', end='')
-        else:
-            print('<img src="img/s.png">', end='')
+    white_stone_board = white_stone(stone_board1)
+    print(f'white_stone_board = {white_stone_board}')
+    print_stone_board(white_stone_board)
 
-        if i % 12 == 11:
-            print('<br>')
+    black_cake_board = sticky_rice_cake_board(black_stone_board)
+    print(f'black_cake_board = {black_cake_board}')
+    print_cake_board(black_cake_board)
 
-    print('')  # New line.
+    white_cake_board = sticky_rice_cake_board(white_stone_board)
+    print(f'white_cake_board = {white_cake_board}')
+    print_cake_board(white_cake_board)
+
+    def print_conv_board(conv_board, color):
+        for i, corners in enumerate(conv_board):
+            #print(f'i={i} corners={corners}')
+            if 1 < corners:
+                if color == 'black':
+                    print('<img src="img/b.png">', end='')
+                elif color == 'white':
+                    print('<img src="img/w.png">', end='')
+                else:
+                    raise f'Invalid color={color}'
+            else:
+                print('<img src="img/s.png">', end='')
+
+            if i % 12 == 11:
+                print('<br>')
+
+        print('')  # New line.
+
+    print('Trace   | Black cake.')
+    conv_board = convolute(black_cake_board)
+    print_conv_board(conv_board, 'black')
+
+    print('Trace   | White cake.')
+    conv_board = convolute(white_cake_board)
+    print_conv_board(conv_board, 'white')
+
     print('Trace   | Finished.')
 
 
