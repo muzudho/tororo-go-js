@@ -19,7 +19,7 @@ def go():
 
     print('Trace   | Copy.')
     copy_dir('/src')
-    copy_dir('/tool')
+    copy_dir('/tool', ignore=shutil.ignore_patterns('__pycache__'))
     copy_file('/copy-to-git.py')
     copy_file('/LICENSE')
     copy_file('/README.md')

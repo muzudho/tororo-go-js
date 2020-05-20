@@ -23,18 +23,18 @@ oox....xxxoo./
     board_array = board.replace(' ', '').replace('\n', '').replace('/', '')
 
     for i, stone in enumerate(board_array):
-        under, _ = number(board_array, i, stone)
-        under_p = coordinate_under(under)
+        _, cover = number(board_array, i, stone)
+        cover_p = coordinate_cover()
         # print(
         #    f'i={i} under=0x{under:02X} cover=0x{cover:02X} under_p0={under_p[0]} under_p1={under_p[1]}')
         if stone == '.':
             print('<img src="img/s.png">', end='')
         elif stone == "x":
             print(
-                f'<img src="img/black-stone.png" style="object-fit: none; object-position:{under_p[0]}px {under_p[1]}px; width:40px; height:40px;">', end='')
+                f'<img src="img/black-stone.png" style="object-fit: none; object-position:{cover_p[0]}px {cover_p[1]}px; width:40px; height:40px;">', end='')
         elif stone == "o":
             print(
-                f'<img src="img/white-stone.png" style="object-fit: none; object-position:{under_p[0]}px {under_p[1]}px; width:40px; height:40px;">', end='')
+                f'<img src="img/white-stone.png" style="object-fit: none; object-position:{cover_p[0]}px {cover_p[1]}px; width:40px; height:40px;">', end='')
         elif stone == "/":
             print('<br>')
         elif stone == " " or stone == "\n":
@@ -44,6 +44,10 @@ oox....xxxoo./
 
     print('')  # New line.
     print('Trace   | Finished.')
+
+
+def coordinate_cover():
+    return (-180, -20)
 
 
 go()
