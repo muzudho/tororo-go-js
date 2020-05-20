@@ -19,8 +19,22 @@ def coordinate_under(num):
     return arr[num//0x10]
 
 
-def number(board: str, index, stone):
-    """
+def sticky_rice_cake_board(board_array):
+    """餅盤を作ります。"""
+    result = []
+
+    for i, stone in enumerate(board_array):
+        under, cover = sticky_rice_cake(board_array, i, stone)
+        print(
+            f'i={i} stone={stone} sticky_rice_cake={under+cover:02X} under={under} cover={cover}')
+        result.append(under+cover)
+
+    return result
+
+
+def sticky_rice_cake(board: str, index, stone):
+    """餅数を求めます。
+
     Parameters
     ----------
     board:
@@ -28,6 +42,9 @@ def number(board: str, index, stone):
     """
     under = 0
     cover = 0
+
+    if stone == '.':
+        return (under, cover)
 
     col = index % 13
     row = index // 13

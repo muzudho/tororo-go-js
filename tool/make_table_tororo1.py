@@ -1,4 +1,4 @@
-from pytororo.pytororo import number
+from pytororo.pytororo import sticky_rice_cake, coordinate_under
 
 
 def go():
@@ -23,7 +23,7 @@ oox....xxxoo./
     board_array = board.replace(' ', '').replace('\n', '').replace('/', '')
 
     for i, stone in enumerate(board_array):
-        under, _ = number(board_array, i, stone)
+        under, _ = sticky_rice_cake(board_array, i, stone)
         under_p = coordinate_under(under)
         # print(
         #    f'i={i} under=0x{under:02X} cover=0x{cover:02X} under_p0={under_p[0]} under_p1={under_p[1]}')
