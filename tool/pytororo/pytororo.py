@@ -28,11 +28,12 @@ def print_stone_board(stone_board):
     print()  # New line.
 
 
-def print_cake_board(cake_board):
+def print_cake_board(stone_board, cake_board):
     """餅の色情報は持てません。
     """
     for i, cake in enumerate(cake_board):
-        if cake == 0:
+        if stone_board[i] == '.':
+            # 石が無い場合 (餅成分が 0 であっても、石がある場合と無い場合を区別できません)
             print('<img src="img/s.png">', end='')
         else:
             # print(f'i={i} cake={cake:02X} {cake//0x10:02X}')

@@ -31,11 +31,11 @@ oox....xxxoo./
 
     black_cake_board = sticky_rice_cake_board(black_stone_board)
     print(f'black_cake_board = {black_cake_board}')
-    print_cake_board(black_cake_board)
+    print_cake_board(black_stone_board, black_cake_board)
 
     white_cake_board = sticky_rice_cake_board(white_stone_board)
     print(f'white_cake_board = {white_cake_board}')
-    print_cake_board(white_cake_board)
+    print_cake_board(white_stone_board, white_cake_board)
 
     def print_conv_board(conv_board, color):
         for i, corners in enumerate(conv_board):
