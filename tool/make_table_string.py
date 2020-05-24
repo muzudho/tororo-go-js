@@ -40,7 +40,8 @@ oox....xxxoo./
         for row in range(0, yylen):
             for col in range(0, xxlen):
                 addr = row*drow + col*dx+offset
-                bit = neighbor8(black_stone_board, addr, color) if color == 'x' else neighbor8(
+
+                bit = None if stone_board1[addr] != '.' else neighbor8(black_stone_board, addr, color) if color == 'x' else neighbor8(
                     white_stone_board, addr, color) if color == 'o' else None
 
                 """
@@ -109,9 +110,6 @@ def neighbor8(board: str, index, stone):
         /、空白、改行記号は取り除いておいてください。
     """
     num = 0
-
-    if board[index] != '.':
-        return
 
     col = index % 13
     row = index // 13
