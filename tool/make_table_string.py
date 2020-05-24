@@ -24,139 +24,68 @@ oox....xxxoo./
     white_stone_board = white_stone(stone_board1)
 
     img_num_dict = create_image_num_dict()
+    # print(f'Debug   | img_num_dict={img_num_dict}')
     coord_string_dict = create_coordinate_string_dict()
+    # print(f'Debug   | coord_string_dict={coord_string_dict}')
 
-    def get_coord(addr):
-        bit = neighbor8(white_stone_board, addr, 'o')
-        if bit in img_num_dict:
-            img_num = img_num_dict[bit]
-            return coord_string_dict[img_num]
+    def print_layer(cols, rows, dx, dy):
+        for row in range(0, rows):
+            for col in range(0, cols):
+                addr = 3*(row+dy)*cols + 3*col+dx
+                bit = neighbor8(white_stone_board, addr, 'o')
+                """
+                if bit is not None:
+                    print(
+                        f'Debug   | addr={addr:>3} bit={bit:>3} exists={bit in img_num_dict}')
+                else:
+                    print(
+                        f'Debug   | addr={addr} None')
+                """
+                if bit in img_num_dict:
+                    img_num = img_num_dict[bit]
+                    coord = coord_string_dict[img_num]
+                    print(
+                        f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+                else:
+                    print(
+                        f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+        print('')  # New line.
 
     # 1st layer.
     print('Trace   | 1st layer.')
-    cols = 5
-    for row in range(0, 5):
-        for col in range(0, cols):
-            coord = get_coord(3*row*cols + 3*col)
-            if coord is None:
-                print(
-                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
-            else:
-                print(
-                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
-    print('')  # New line.
+    print_layer(5, 5, 0, 0)
 
     # 2nd layer.
     print('Trace   | 2nd layer.')
-    cols = 4
-    for row in range(0, 5):
-        for col in range(0, cols):
-            coord = get_coord(3*row*cols + 3*col)
-            if coord is None:
-                print(
-                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
-            else:
-                print(
-                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
-    print('')  # New line.
+    print_layer(4, 5, 1, 0)
 
     # 3rd layer.
     print('Trace   | 3rd layer.')
-    cols = 4
-    for row in range(0, 5):
-        for col in range(0, cols):
-            coord = get_coord(3*row*cols + 3*col)
-            if coord is None:
-                print(
-                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
-            else:
-                print(
-                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
-    print('')  # New line.
+    print_layer(4, 5, 2, 0)
 
     # 4th layer.
     print('Trace   | 4th layer.')
-    cols = 5
-    for row in range(0, 4):
-        for col in range(0, cols):
-            coord = get_coord(3*row*cols + 3*col)
-            if coord is None:
-                print(
-                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
-            else:
-                print(
-                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
-    print('')  # New line.
+    print_layer(4, 5, 0, 1)
 
     # 5th layer.
     print('Trace   | 5th layer.')
-    cols = 4
-    for row in range(0, 4):
-        for col in range(0, cols):
-            coord = get_coord(3*row*cols + 3*col)
-            if coord is None:
-                print(
-                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
-            else:
-                print(
-                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
-    print('')  # New line.
+    print_layer(4, 4, 1, 1)
 
     # 6th layer.
     print('Trace   | 6th layer.')
-    cols = 4
-    for row in range(0, 4):
-        for col in range(0, cols):
-            coord = get_coord(3*row*cols + 3*col)
-            if coord is None:
-                print(
-                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
-            else:
-                print(
-                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
-    print('')  # New line.
+    print_layer(4, 4, 2, 1)
 
     # 7th layer.
     print('Trace   | 7th layer.')
-    cols = 5
-    for row in range(0, 4):
-        for col in range(0, cols):
-            coord = get_coord(3*row*cols + 3*col)
-            if coord is None:
-                print(
-                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
-            else:
-                print(
-                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
-    print('')  # New line.
+    print_layer(5, 4, 0, 2)
 
     # 8th layer.
-    cols = 4
     print('Trace   | 8th layer.')
-    for row in range(0, 4):
-        for col in range(0, cols):
-            coord = get_coord(3*row*cols + 3*col)
-            if coord is None:
-                print(
-                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
-            else:
-                print(
-                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
-    print('')  # New line.
+    print_layer(4, 4, 1, 2)
 
     # 9th layer.
-    cols = 4
     print('Trace   | 9th layer.')
-    for row in range(0, 4):
-        for col in range(0, cols):
-            coord = get_coord(3*row*cols + 3*col)
-            if coord is None:
-                print(
-                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
-            else:
-                print(
-                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
-    print('')  # New line.
+    print_layer(4, 4, 2, 2)
 
     print('Trace   | Finish.')
 
@@ -171,8 +100,8 @@ def neighbor8(board: str, index, stone):
     """
     num = 0
 
-    if stone != '.':
-        return 0
+    if board[index] != '.':
+        return
 
     col = index % 13
     row = index // 13
