@@ -41,50 +41,57 @@ oox....xxxoo./
                     print(
                         f'Debug   | addr={addr} None')
                 """
+                """
+                # Grid
+                print(
+                    f'<img src="img/rect-m.png" style="width:120px; height:120px;">', end='')
+                """
+
                 if bit in img_num_dict:
                     img_num = img_num_dict[bit]
                     coord = coord_string_dict[img_num]
                     print(
-                        f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+                        f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:120px; height:120px;">', end='')
                 else:
                     print(
-                        f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+                        f'<img src="img/_.png" style="width:120px; height:120px;">', end='')
+
         print('')  # New line.
 
     # 1st layer.
-    print('Trace   | 1st layer.')
+    print('\nTrace   | 1st layer.\n')
     print_layer(5, 5, 0, 0)
 
     # 2nd layer.
-    print('Trace   | 2nd layer.')
+    print('\nTrace   | 2nd layer.\n')
     print_layer(4, 5, 1, 0)
 
     # 3rd layer.
-    print('Trace   | 3rd layer.')
+    print('\nTrace   | 3rd layer.\n')
     print_layer(4, 5, 2, 0)
 
     # 4th layer.
-    print('Trace   | 4th layer.')
+    print('\nTrace   | 4th layer.\n')
     print_layer(4, 5, 0, 1)
 
     # 5th layer.
-    print('Trace   | 5th layer.')
+    print('\nTrace   | 5th layer.\n')
     print_layer(4, 4, 1, 1)
 
     # 6th layer.
-    print('Trace   | 6th layer.')
+    print('\nTrace   | 6th layer.\n')
     print_layer(4, 4, 2, 1)
 
     # 7th layer.
-    print('Trace   | 7th layer.')
+    print('\nTrace   | 7th layer.\n')
     print_layer(5, 4, 0, 2)
 
     # 8th layer.
-    print('Trace   | 8th layer.')
+    print('\nTrace   | 8th layer.\n')
     print_layer(4, 4, 1, 2)
 
     # 9th layer.
-    print('Trace   | 9th layer.')
+    print('\nTrace   | 9th layer.\n')
     print_layer(4, 4, 2, 2)
 
     print('Trace   | Finish.')
@@ -244,38 +251,40 @@ def create_image_num_dict():
 
 def create_coordinate_string_dict():
     """31パターンのヒモ。"""
+    w = 60
+    h = 60
     return {
         47: (0, 0),
-        57: (1*-40, 0),
-        58: (2*-40, 0),
-        16: (4*-40, 0),
-        35: (5*-40, 0),
-        36: (6*-40, 0),
-        38: (0, 1*-40),
-        13: (1*-40, 1*-40),
-        14: (2*-40, 1*-40),
-        15: (3*-40, 1*-40),
-        25: (4*-40, 1*-40),
-        17: (5*-40, 1*-40),
-        27: (6*-40, 1*-40),
-        37: (7*-40, 1*-40),
-        1357: (0, 2*-40),
-        1571: (1*-40, 2*-40),
-        7135: (2*-40, 2*-40),
-        3583: (4*-40, 2*-40),
-        274: (5*-40, 2*-40),
-        1361: (6*-40, 2*-40),
-        1371: (0, 3*-40),
-        15037: (1*-40, 3*-40),
-        3573: (2*-40, 3*-40),
-        416: (4*-40, 3*-40),
-        258: (6*-40, 3*-40),
-        1753: (0, 4*-40),
-        1351: (1*-40, 4*-40),
-        3175: (2*-40, 4*-40),
-        2572: (4*-40, 4*-40),
-        638: (5*-40, 4*-40),
-        1471: (6*-40, 4*-40),
+        57: (1*-w, 0),
+        58: (2*-w, 0),
+        16: (4*-w, 0),
+        35: (5*-w, 0),
+        36: (6*-w, 0),
+        38: (0, 1*-h),
+        13: (1*-w, 1*-h),
+        14: (2*-w, 1*-h),
+        15: (3*-w, 1*-h),
+        25: (4*-w, 1*-h),
+        17: (5*-w, 1*-h),
+        27: (6*-w, 1*-h),
+        37: (7*-w, 1*-h),
+        1357: (0, 2*-h),
+        1571: (1*-w, 2*-h),
+        7135: (2*-w, 2*-h),
+        3583: (4*-w, 2*-h),
+        274: (5*-w, 2*-h),
+        1361: (6*-w, 2*-h),
+        1371: (0, 3*-h),
+        15037: (1*-w, 3*-h),
+        3573: (2*-w, 3*-h),
+        416: (4*-w, 3*-h),
+        258: (6*-w, 3*-h),
+        1753: (0, 4*-h),
+        1351: (1*-w, 4*-h),
+        3175: (2*-w, 4*-h),
+        2572: (4*-w, 4*-h),
+        638: (5*-w, 4*-h),
+        1471: (6*-w, 4*-h),
     }
 
 
