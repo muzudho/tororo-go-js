@@ -1,50 +1,162 @@
+from pytororo.pytororo import stone_board, black_stone, white_stone, sticky_rice_cake, sticky_rice_cake_board, print_stone_board, print_cake_board
+
+
 def go():
     print('Trace   | Start.')
 
+    board = """\
+.x...o......./
+ooxxxxoo...../
+.oox..x..o.../
+o.oox..x...../
+oooox....o.../
+xxxx..x.o..../
+............./
+.......x.o.o./
+.x........ox./
+ox.x...x.oxx./
+.ox....xooxxo/
+oox....xxxoo./
+.o.........../
+    """
+
+    stone_board1 = stone_board(board)
+    white_stone_board = white_stone(stone_board1)
+
+    img_num_dict = create_image_num_dict()
+    coord_string_dict = create_coordinate_string_dict()
+
+    def get_coord(addr):
+        bit = neighbor8(white_stone_board, addr, 'o')
+        if bit in img_num_dict:
+            img_num = img_num_dict[bit]
+            return coord_string_dict[img_num]
+
     # 1st layer.
+    print('Trace   | 1st layer.')
+    cols = 5
     for row in range(0, 5):
-        for col in range(0, 5):
-            pass
+        for col in range(0, cols):
+            coord = get_coord(3*row*cols + 3*col)
+            if coord is None:
+                print(
+                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+            else:
+                print(
+                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+    print('')  # New line.
 
     # 2nd layer.
+    print('Trace   | 2nd layer.')
+    cols = 4
     for row in range(0, 5):
-        for col in range(0, 4):
-            pass
+        for col in range(0, cols):
+            coord = get_coord(3*row*cols + 3*col)
+            if coord is None:
+                print(
+                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+            else:
+                print(
+                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+    print('')  # New line.
 
     # 3rd layer.
+    print('Trace   | 3rd layer.')
+    cols = 4
     for row in range(0, 5):
-        for col in range(0, 4):
-            pass
+        for col in range(0, cols):
+            coord = get_coord(3*row*cols + 3*col)
+            if coord is None:
+                print(
+                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+            else:
+                print(
+                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+    print('')  # New line.
 
     # 4th layer.
+    print('Trace   | 4th layer.')
+    cols = 5
     for row in range(0, 4):
-        for col in range(0, 5):
-            pass
+        for col in range(0, cols):
+            coord = get_coord(3*row*cols + 3*col)
+            if coord is None:
+                print(
+                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+            else:
+                print(
+                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+    print('')  # New line.
 
     # 5th layer.
+    print('Trace   | 5th layer.')
+    cols = 4
     for row in range(0, 4):
-        for col in range(0, 4):
-            pass
+        for col in range(0, cols):
+            coord = get_coord(3*row*cols + 3*col)
+            if coord is None:
+                print(
+                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+            else:
+                print(
+                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+    print('')  # New line.
 
     # 6th layer.
+    print('Trace   | 6th layer.')
+    cols = 4
     for row in range(0, 4):
-        for col in range(0, 4):
-            pass
+        for col in range(0, cols):
+            coord = get_coord(3*row*cols + 3*col)
+            if coord is None:
+                print(
+                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+            else:
+                print(
+                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+    print('')  # New line.
 
     # 7th layer.
+    print('Trace   | 7th layer.')
+    cols = 5
     for row in range(0, 4):
-        for col in range(0, 5):
-            pass
+        for col in range(0, cols):
+            coord = get_coord(3*row*cols + 3*col)
+            if coord is None:
+                print(
+                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+            else:
+                print(
+                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+    print('')  # New line.
 
     # 8th layer.
+    cols = 4
+    print('Trace   | 8th layer.')
     for row in range(0, 4):
-        for col in range(0, 4):
-            pass
+        for col in range(0, cols):
+            coord = get_coord(3*row*cols + 3*col)
+            if coord is None:
+                print(
+                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+            else:
+                print(
+                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+    print('')  # New line.
 
     # 9th layer.
+    cols = 4
+    print('Trace   | 9th layer.')
     for row in range(0, 4):
-        for col in range(0, 4):
-            pass
+        for col in range(0, cols):
+            coord = get_coord(3*row*cols + 3*col)
+            if coord is None:
+                print(
+                    f'<img src="img/_.png" style="width:40px; height:40px;">', end='')
+            else:
+                print(
+                    f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:40px; height:40px;">', end='')
+    print('')  # New line.
 
     print('Trace   | Finish.')
 
@@ -100,77 +212,142 @@ def neighbor8(board: str, index, stone):
     return num
 
 
-def image_num():
-    """TODO 画像番号。"""
-    pass
+def create_image_num_dict():
+    """TODO 画像番号連想配列。"""
+
+    dic = {}
+
+    for i in [72, 104, 143, 200, 232]:
+        dic[i] = 47
+
+    for i in [132, 134, 140, 142, 188]:
+        dic[i] = 38
+
+    for i in [80, 88, 92, 94, 208, 209, 211, 215, 216, 217, 219, 220, 221, 222]:
+        dic[i] = 57
+
+    for i in [5, 13, 29, 61, 125, 133, 141, 157, 189, 197, 205, 229, 237]:
+        dic[i] = 13
+
+    for i in [144, 152, 156, 158, 176, 184, 190]:
+        dic[i] = 58
+
+    for i in [9, 11, 137, 139, 201, 233, 235]:
+        dic[i] = 14
+
+    for i in [17, 19, 25, 27, 49, 51, 57, 59, 145, 147, 153, 155, 177, 179, 185]:
+        dic[i] = 15
+
+    for i in [33, 35, 47, 161, 163]:
+        dic[i] = 16
+
+    for i in [18, 26, 50, 58, 242]:
+        dic[i] = 25
+
+    for i in [20, 22, 23, 52, 54, 55, 116, 118, 135, 183, 244, 245, 246]:
+        dic[i] = 35
+
+    for i in [65, 67, 71, 79, 95, 97, 99, 103, 111, 113, 115, 119, 121, 123]:
+        dic[i] = 17
+
+    for i in [36, 38, 39, 44, 46, 167, 175]:
+        dic[i] = 36
+
+    for i in [66, 98, 114, 122, 194, 226, 250]:
+        dic[i] = 27
+
+    for i in [68, 70, 76, 78, 100, 102, 108, 110, 196, 198, 204, 206, 228, 230, 236]:
+        dic[i] = 37
+
+    for i in [85]:
+        dic[i] = 15037
+
+    for i in [84, 86, 212, 214]:
+        dic[i] = 3573
+
+    for i in [117]:
+        dic[i] = 7135
+
+    for i in [81, 83, 89, 91]:
+        dic[i] = 1571
+
+    for i in [213]:
+        dic[i] = 1357
+
+    for i in [69, 77, 101, 109]:
+        dic[i] = 1371
+
+    for i in [87]:
+        dic[i] = 1753
+
+    for i in [21, 53, 149, 181]:
+        dic[i] = 1351
+
+    for i in [93]:
+        dic[i] = 3175
+
+    for i in [146, 154, 178, 186]:
+        dic[i] = 258
+
+    for i in [37, 45, 165, 173]:
+        dic[i] = 1361
+
+    for i in [74, 106, 202, 234]:
+        dic[i] = 274
+
+    for i in [148, 150, 180, 182]:
+        dic[i] = 3583
+
+    for i in [41, 43, 169, 171]:
+        dic[i] = 416
+
+    for i in [82, 90, 210, 218]:
+        dic[i] = 2572
+
+    for i in [164, 166, 172, 174]:
+        dic[i] = 638
+
+    for i in [73, 75, 105, 107]:
+        dic[i] = 1471
+
+    return dic
 
 
-def coordinate_string(num):
-    # 31パターンのヒモ。
-    if num == 47:
-        return (0, 0)
-    elif num == 57:
-        return (1*-40, 0)
-    elif num == 58:
-        return (2*-40, 0)
-    elif num == 16:
-        return (4*-40, 0)
-    elif num == 35:
-        return (5*-40, 0)
-    elif num == 36:
-        return (6*-40, 0)
-    elif num == 38:
-        return (0, 1*-40)
-    elif num == 13:
-        return (1*-40, 1*-40)
-    elif num == 14:
-        return (2*-40, 1*-40)
-    elif num == 15:
-        return (3*-40, 1*-40)
-    elif num == 25:
-        return (4*-40, 1*-40)
-    elif num == 17:
-        return (5*-40, 1*-40)
-    elif num == 27:
-        return (6*-40, 1*-40)
-    elif num == 37:
-        return (7*-40, 1*-40)
-    elif num == 1357:
-        return (0, 2*-40)
-    elif num == 1571:
-        return (1*-40, 2*-40)
-    elif num == 7135:
-        return (2*-40, 2*-40)
-    elif num == 3583:
-        return (4*-40, 2*-40)
-    elif num == 274:
-        return (5*-40, 2*-40)
-    elif num == 1361:
-        return (6*-40, 2*-40)
-    elif num == 1371:
-        return (0, 3*-40)
-    elif num == 15037:
-        return (1*-40, 3*-40)
-    elif num == 3573:
-        return (2*-40, 3*-40)
-    elif num == 416:
-        return (4*-40, 3*-40)
-    elif num == 258:
-        return (6*-40, 3*-40)
-    elif num == 1753:
-        return (0, 4*-40)
-    elif num == 1351:
-        return (1*-40, 4*-40)
-    elif num == 3175:
-        return (2*-40, 4*-40)
-    elif num == 2572:
-        return (4*-40, 4*-40)
-    elif num == 638:
-        return (5*-40, 4*-40)
-    elif num == 1471:
-        return (6*-40, 4*-40)
-    else:
-        raise f'Invalid num={num}'
+def create_coordinate_string_dict():
+    """31パターンのヒモ。"""
+    return {
+        47: (0, 0),
+        57: (1*-40, 0),
+        58: (2*-40, 0),
+        16: (4*-40, 0),
+        35: (5*-40, 0),
+        36: (6*-40, 0),
+        38: (0, 1*-40),
+        13: (1*-40, 1*-40),
+        14: (2*-40, 1*-40),
+        15: (3*-40, 1*-40),
+        25: (4*-40, 1*-40),
+        17: (5*-40, 1*-40),
+        27: (6*-40, 1*-40),
+        37: (7*-40, 1*-40),
+        1357: (0, 2*-40),
+        1571: (1*-40, 2*-40),
+        7135: (2*-40, 2*-40),
+        3583: (4*-40, 2*-40),
+        274: (5*-40, 2*-40),
+        1361: (6*-40, 2*-40),
+        1371: (0, 3*-40),
+        15037: (1*-40, 3*-40),
+        3573: (2*-40, 3*-40),
+        416: (4*-40, 3*-40),
+        258: (6*-40, 3*-40),
+        1753: (0, 4*-40),
+        1351: (1*-40, 4*-40),
+        3175: (2*-40, 4*-40),
+        2572: (4*-40, 4*-40),
+        638: (5*-40, 4*-40),
+        1471: (6*-40, 4*-40),
+    }
 
 
 go()
