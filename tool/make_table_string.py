@@ -21,6 +21,7 @@ oox....xxxoo./
     """
 
     stone_board1 = stone_board(board)
+    black_stone_board = black_stone(stone_board1)
     white_stone_board = white_stone(stone_board1)
 
     img_num_dict = create_image_num_dict()
@@ -28,11 +29,20 @@ oox....xxxoo./
     coord_string_dict = create_coordinate_string_dict()
     # print(f'Debug   | coord_string_dict={coord_string_dict}')
 
-    def print_layer(cols, rows, dx, dy):
-        for row in range(0, rows):
-            for col in range(0, cols):
-                addr = 3*(row+dy)*cols + 3*col+dx
-                bit = neighbor8(white_stone_board, addr, 'o')
+    def print_layer(xxlen, yylen, dx, drow, offset, color: str):
+        """HTMLを出力します。
+
+        Parameters
+        ----------
+        color:
+            'x' - black. 'o' - white.
+        """
+        for row in range(0, yylen):
+            for col in range(0, xxlen):
+                addr = row*drow + col*dx+offset
+                bit = neighbor8(black_stone_board, addr, color) if color == 'x' else neighbor8(
+                    white_stone_board, addr, color) if color == 'o' else None
+
                 """
                 if bit is not None:
                     print(
@@ -42,7 +52,7 @@ oox....xxxoo./
                         f'Debug   | addr={addr} None')
                 """
                 """
-                # Grid
+                # Grid for debug.
                 print(
                     f'<img src="img/rect-m.png" style="width:120px; height:120px;">', end='')
                 """
@@ -50,55 +60,48 @@ oox....xxxoo./
                 if bit in img_num_dict:
                     img_num = img_num_dict[bit]
                     coord = coord_string_dict[img_num]
-                    print(
-                        f'<img src="img/black-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:120px; height:120px;">', end='')
+                    if color == 'x':
+                        print(
+                            f'<img src="img/black-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:120px; height:120px;">', end='')
+                    elif color == 'o':
+                        print(
+                            f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:120px; height:120px;">', end='')
+                    else:
+                        raise f'Invalid color={color}'
+
                 else:
                     print(
                         f'<img src="img/_.png" style="width:120px; height:120px;">', end='')
 
         print('')  # New line.
 
-    # 1st layer.
-    print('\nTrace   | 1st layer.\n')
-    print_layer(5, 5, 0, 0)
-
-    # 2nd layer.
-    print('\nTrace   | 2nd layer.\n')
-    print_layer(4, 5, 1, 0)
-
-    # 3rd layer.
-    print('\nTrace   | 3rd layer.\n')
-    print_layer(4, 5, 2, 0)
-
-    # 4th layer.
-    print('\nTrace   | 4th layer.\n')
-    print_layer(4, 5, 0, 1)
-
-    # 5th layer.
-    print('\nTrace   | 5th layer.\n')
-    print_layer(4, 4, 1, 1)
-
-    # 6th layer.
-    print('\nTrace   | 6th layer.\n')
-    print_layer(4, 4, 2, 1)
-
-    # 7th layer.
-    print('\nTrace   | 7th layer.\n')
-    print_layer(5, 4, 0, 2)
-
-    # 8th layer.
-    print('\nTrace   | 8th layer.\n')
-    print_layer(4, 4, 1, 2)
-
-    # 9th layer.
-    print('\nTrace   | 9th layer.\n')
-    print_layer(4, 4, 2, 2)
+    # String 1st-9th layers.
+    colors = [('white', 'o'), ('black', 'x')]
+    for color in colors:
+        print(f'\nTrace   | {color[0]}-string 1st layer.\n')
+        print_layer(5, 5, 3, 39, 0, color[1])
+        print(f'\nTrace   | {color[0]}-string 2nd layer.\n')
+        print_layer(4, 5, 3, 39, 1, color[1])
+        print(f'\nTrace   | {color[0]}-string 3rd layer.\n')
+        print_layer(4, 5, 3, 39, 2, color[1])
+        print(f'\nTrace   | {color[0]}-string 4th layer.\n')
+        print_layer(5, 4, 3, 39, 13, color[1])
+        print(f'\nTrace   | {color[0]}-string 5th layer.\n')
+        print_layer(4, 4, 3, 39, 14, color[1])
+        print(f'\nTrace   | {color[0]}-string 6th layer.\n')
+        print_layer(4, 4, 3, 39, 15, color[1])
+        print(f'\nTrace   | {color[0]}-string 7th layer.\n')
+        print_layer(5, 4, 3, 39, 26, color[1])
+        print(f'\nTrace   | {color[0]}-string 8th layer.\n')
+        print_layer(4, 4, 3, 39, 27, color[1])
+        print(f'\nTrace   | {color[0]}-string 9th layer.\n')
+        print_layer(4, 4, 3, 39, 28, color[1])
 
     print('Trace   | Finish.')
 
 
 def neighbor8(board: str, index, stone):
-    """紐付きパターンを求めます。
+    """紐付きパターンを求めます。中央に石が置いてあれば None です。
 
     Parameters
     ----------
