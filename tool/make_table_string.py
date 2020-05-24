@@ -51,7 +51,7 @@ oox....xxxoo./
                     img_num = img_num_dict[bit]
                     coord = coord_string_dict[img_num]
                     print(
-                        f'<img src="img/white-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:120px; height:120px;">', end='')
+                        f'<img src="img/black-string.png" style="object-fit: none; object-position:{coord[0]}px {coord[1]}px; width:120px; height:120px;">', end='')
                 else:
                     print(
                         f'<img src="img/_.png" style="width:120px; height:120px;">', end='')
@@ -251,8 +251,8 @@ def create_image_num_dict():
 
 def create_coordinate_string_dict():
     """31パターンのヒモ。"""
-    w = 60
-    h = 60
+    w = 120
+    h = 120
     return {
         47: (0, 0),
         57: (1*-w, 0),
