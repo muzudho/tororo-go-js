@@ -28,7 +28,7 @@ def print_stone_board(stone_board):
     print()  # New line.
 
 
-def print_cake_board(stone_board, cake_board):
+def print_cake_board(stone_board, cake_board, img_src='img/gray-stone.png'):
     """餅の色情報は持てません。
     """
     for i, cake in enumerate(cake_board):
@@ -39,7 +39,7 @@ def print_cake_board(stone_board, cake_board):
             # print(f'i={i} cake={cake:02X} {cake//0x10:02X}')
             under_p = coordinate_under(cake)
             print(
-                f'<img src="img/gray-stone.png" style="object-fit: none; object-position:{under_p[0]}px {under_p[1]}px; width:40px; height:40px;">', end='')
+                f'<img src="{img_src}" style="object-fit: none; object-position:{under_p[0]}px {under_p[1]}px; width:40px; height:40px;">', end='')
 
         if i % 13 == 12:
             print('<br>')

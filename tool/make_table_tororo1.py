@@ -1,4 +1,4 @@
-from pytororo.pytororo import sticky_rice_cake, coordinate_under
+from pytororo.pytororo import stone_board, print_stone_board
 
 
 def go():
@@ -20,29 +20,9 @@ oox....xxxoo./
 .o.........../
     """
 
-    board_array = board.replace(' ', '').replace('\n', '').replace('/', '')
+    stone_board1 = stone_board(board)
+    print_stone_board(stone_board1)
 
-    for i, stone in enumerate(board_array):
-        under, _ = sticky_rice_cake(board_array, i, stone)
-        under_p = coordinate_under(under)
-        # print(
-        #    f'i={i} under=0x{under:02X} cover=0x{cover:02X} under_p0={under_p[0]} under_p1={under_p[1]}')
-        if stone == '.':
-            print('<img src="img/s.png">', end='')
-        elif stone == "x":
-            print(
-                f'<img src="img/black-stone.png" style="object-fit: none; object-position:{under_p[0]}px {under_p[1]}px; width:40px; height:40px;">', end='')
-        elif stone == "o":
-            print(
-                f'<img src="img/white-stone.png" style="object-fit: none; object-position:{under_p[0]}px {under_p[1]}px; width:40px; height:40px;">', end='')
-        elif stone == "/":
-            print('<br>')
-        elif stone == " " or stone == "\n":
-            pass
-        else:
-            print(f"[{stone}]?", end='')
-
-    print('')  # New line.
     print('Trace   | Finished.')
 
 
