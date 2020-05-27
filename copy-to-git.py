@@ -11,6 +11,7 @@ destination = 'C:/Users/むずでょ/Documents/GitHub/tororo-go-js'
 
 def go():
     print('Trace   | Remove.')
+    remove_destination_dir('/meta')
     remove_destination_dir('/src')
     remove_destination_dir('/tool')
     remove_destination_file('/copy-to-git.py')
@@ -18,6 +19,7 @@ def go():
     remove_destination_file('/README.md')
 
     print('Trace   | Copy.')
+    copy_dir('/meta')
     copy_dir('/src')
     copy_dir('/tool', ignore=shutil.ignore_patterns('__pycache__'))
     copy_file('/copy-to-git.py')
