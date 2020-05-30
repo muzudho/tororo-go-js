@@ -1,12 +1,12 @@
 pure_board_map = []
-for x in range(2, 15):
-    for y in range(2, 15):
+for y in range(2, 15):
+    for x in range(2, 15):
         pure_board_map.append((x, y))
 # print(f'pure_board_map=len:{len(pure_board_map)} {pure_board_map}')
 
 window_5x5 = []
-for x in range(-2, 3):
-    for y in range(-2, 3):
+for y in range(-2, 3):
+    for x in range(-2, 3):
         window_5x5.append((x, y))
 # print(f'window_5x5=len:{len(window_5x5)} {window_5x5}')
 
@@ -47,23 +47,26 @@ neighbor24_map = [(-2, -2), (-1, -2), (0, -2), (1, -2), (2, -2),
                   (-2, 2), (-1, 2), (0, 2), (1, 2), (2, 2)]
 
 
-def stone_density_node(stone_board, color):
+def stone_density_node(stone_board):
     """盤サイズは 太さ2と3の枠が付いた 計18x18 にしてください。"""
     num_board = [0] * (18*18)
 
-    def count_up(stone_board, p, color):
+    def count_up(stone_board, p, pp):
         nonlocal num_board
-        num_board[to_addr18x18(p)] += match_color(stone_board, p, color)
+        if stone_board[to_addr18x18(pp)] != '.':
+            num_board[to_addr18x18(p)] += 1
 
     scan_pure_board(lambda p: scan_window_5x5(
-        lambda pp: count_up(stone_board, pp, color), p))
+        lambda pp: count_up(stone_board, p, pp), p))
     return num_board
 
 
+'''
 def scan_neighbor8(f, p):
     for pp in neighbor24_map:
         f((pp[0] + p[0], pp[1]+p[1]))
     pass
+'''
 
 
 def scan_pure_board(f):
@@ -78,11 +81,13 @@ def scan_window_5x5(f, p):
         f((p[0]+pp[0], p[1]+pp[1]))
 
 
+'''
 def match_color(stone_board, p, color):
     if stone_board[to_addr18x18(p)] == color:
         return 1
 
     return 0
+'''
 
 
 def stone_density_sq():
@@ -117,3 +122,10 @@ def ccw270(p):
 def to_addr18x18(p):
     """18x18盤の番地に変換"""
     return 18*p[1]+p[0]
+
+
+'''
+for p in pure_board_map:
+    # print(p)
+    print(to_addr18x18(p))
+'''

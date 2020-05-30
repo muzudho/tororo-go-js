@@ -27,7 +27,7 @@ oox....xxxoo./
     stone_board18x18 = line_to_table_str(stone_board324, 18)
     print(stone_board18x18)
 
-    num_board324 = stone_density_node(stone_board324, 'x')
+    num_board324 = stone_density_node(stone_board324)
     # print(num_board324)
     num_board18x18 = line_to_table(num_board324, 18)
     # print(num_board18x18)
