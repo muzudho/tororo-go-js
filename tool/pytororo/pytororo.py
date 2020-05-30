@@ -228,3 +228,14 @@ def convolute(cake_board):
 
 def address(row, col):
     return row * 13 + col
+
+
+def resize13to18str(a: list, default='.'):
+    """13×13サイズのベクトルを、18×18サイズのベクトルに変換します。"""
+    s = ''.join([default] * 38)
+    for row in range(13):
+        s += f"{''.join(a[row*13:(row+1)*13])}{''.join([default] * 5)}"
+
+    s += ''.join([default] * 52)
+
+    return s
