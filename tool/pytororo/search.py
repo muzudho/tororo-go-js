@@ -10,6 +10,13 @@ for y in range(-2, 3):
         window_5x5.append((x, y))
 # print(f'window_5x5=len:{len(window_5x5)} {window_5x5}')
 
+# 右側、下側に１つ多め。
+window_6x6 = []
+for y in range(-2, 4):
+    for x in range(-2, 4):
+        window_6x6.append((x, y))
+# print(f'window_6x6=len:{len(window_6x6)} {window_6x6}')
+
 """
 -2 . . x
 -1 . x x
@@ -61,12 +68,21 @@ def stone_density_node(stone_board):
     return num_board
 
 
-'''
-def scan_neighbor8(f, p):
-    for pp in neighbor24_map:
-        f((pp[0] + p[0], pp[1]+p[1]))
-    pass
-'''
+def stone_density_sq(stone_board):
+    """盤サイズは 太さ2と3の枠が付いた 計18x18 にしてください。"""
+    num_board = [0] * (18*18)
+
+    def count_up(stone_board, p, pp):
+        nonlocal num_board
+        if stone_board[to_addr18x18(pp)] != '.':
+            num_board[to_addr18x18(p)] += 0.25
+            num_board[to_addr18x18((p[0]+1, p[1]))] += 0.25
+            num_board[to_addr18x18((p[0], p[1]+1))] += 0.25
+            num_board[to_addr18x18((p[0]+1, p[1]+1))] += 0.25
+
+    scan_pure_board(lambda p: scan_window_6x6(
+        lambda pp: count_up(stone_board, p, pp), p))
+    return num_board
 
 
 def scan_pure_board(f):
@@ -81,17 +97,10 @@ def scan_window_5x5(f, p):
         f((p[0]+pp[0], p[1]+pp[1]))
 
 
-'''
-def match_color(stone_board, p, color):
-    if stone_board[to_addr18x18(p)] == color:
-        return 1
-
-    return 0
-'''
-
-
-def stone_density_sq():
-    pass
+def scan_window_6x6(f, p):
+    """中心を p とする 6x6 のウィンドウの各マスをイテレートして座標を返します。"""
+    for pp in window_6x6:
+        f((p[0]+pp[0], p[1]+pp[1]))
 
 
 def directed_stone_density_node():
