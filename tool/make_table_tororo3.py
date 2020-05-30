@@ -1,4 +1,4 @@
-from pytororo.pytororo import resize13to18str, stone_board, black_stone, white_stone, sticky_rice_cake, sticky_rice_cake_board, print_stone_board, print_cake_board, print_cake_cover, convolute
+from pytororo.pytororo import resize13to18str, line_to_table_str, line_to_table, stone_board, black_stone, white_stone, sticky_rice_cake, sticky_rice_cake_board, print_stone_board, print_cake_board, print_cake_cover, convolute
 from pytororo.search import stone_density_node
 
 
@@ -22,18 +22,19 @@ oox....xxxoo./
     """
 
     stone_board1 = stone_board(board)
-    board18 = resize13to18str(stone_board1, '.')
-    # print(board18)
-    # board18_text = ''.join(board18)
-    # rows = [''.join(board18[i: i+18]) for i in range(0, len(board18), 18)]
-    rows = [board18[i: i+18] for i in range(0, len(board18), 18)]
-    # print(rows)
-    board18_text = '\n'.join(rows)
-    print(board18_text)
+    # 18x18=324
+    stone_board324 = resize13to18str(stone_board1, '.')
+    stone_board18x18 = line_to_table_str(stone_board324, 18)
+    print(stone_board18x18)
 
-    """
-    num_board17x17 = stone_density_node(stone_board1, 'x')
-    """
+    num_board324 = stone_density_node(stone_board324, 'x')
+    # print(num_board324)
+    num_board18x18 = line_to_table(num_board324, 18)
+    # print(num_board18x18)
+
+    row_format = "{:>3}" * 18
+    for row in num_board18x18:
+        print(row_format.format(*row))
 
     print('Trace   | Finished.')
 

@@ -1,3 +1,15 @@
+pure_board_map = []
+for x in range(2, 15):
+    for y in range(2, 15):
+        pure_board_map.append((x, y))
+# print(f'pure_board_map=len:{len(pure_board_map)} {pure_board_map}')
+
+window_5x5 = []
+for x in range(-2, 3):
+    for y in range(-2, 3):
+        window_5x5.append((x, y))
+# print(f'window_5x5=len:{len(window_5x5)} {window_5x5}')
+
 """
 -2 . . x
 -1 . x x
@@ -36,14 +48,14 @@ neighbor24_map = [(-2, -2), (-1, -2), (0, -2), (1, -2), (2, -2),
 
 
 def stone_density_node(stone_board, color):
-    """盤サイズは 太さ2の枠が付いた 計17x17 にしてください。"""
-    num_board = [0] * (17*17)
+    """盤サイズは 太さ2と3の枠が付いた 計18x18 にしてください。"""
+    num_board = [0] * (18*18)
 
     def count_up(stone_board, p, color):
         nonlocal num_board
-        num_board[to_addr17x17(p)] += match_color(stone_board, p, color)
+        num_board[to_addr18x18(p)] += match_color(stone_board, p, color)
 
-    scan_board(lambda p: scan_neighbor8(
+    scan_pure_board(lambda p: scan_window_5x5(
         lambda pp: count_up(stone_board, pp, color), p))
     return num_board
 
@@ -54,15 +66,20 @@ def scan_neighbor8(f, p):
     pass
 
 
-def scan_board(f):
-    """枠を除いた、盤上を１マスずつイテレートします。"""
-    for x in range(2, 15):
-        for y in range(2, 15):
-            f((x, y))
+def scan_pure_board(f):
+    """枠を除いた、盤上を１マスずつイテレートして座標を返します。Y座標は行番号です。"""
+    for p in pure_board_map:
+        f(p)
+
+
+def scan_window_5x5(f, p):
+    """中心を p とする 5x5 のウィンドウの各マスをイテレートして座標を返します。"""
+    for pp in window_5x5:
+        f((p[0]+pp[0], p[1]+pp[1]))
 
 
 def match_color(stone_board, p, color):
-    if stone_board[to_addr17x17(p)] == color:
+    if stone_board[to_addr18x18(p)] == color:
         return 1
 
     return 0
@@ -97,6 +114,6 @@ def ccw270(p):
     return (-p[1], p[0])
 
 
-def to_addr17x17(p):
-    """17x17盤の番地に変換"""
-    return 17*p[1]+p[0]
+def to_addr18x18(p):
+    """18x18盤の番地に変換"""
+    return 18*p[1]+p[0]

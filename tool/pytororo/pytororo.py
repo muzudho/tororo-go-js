@@ -239,3 +239,14 @@ def resize13to18str(a: list, default='.'):
     s += ''.join([default] * 52)
 
     return s
+
+
+def line_to_table_str(s: str, width: int):
+    """１行の文字列を、複数行にします。"""
+    rows = [s[i: i+width] for i in range(0, len(s), width)]
+    return '\n'.join(rows)
+
+
+def line_to_table(li: list, width: int):
+    """１行の配列を、二次元配列にします。"""
+    return [li[i: i+width] for i in range(0, len(li), width)]
