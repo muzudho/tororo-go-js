@@ -177,6 +177,18 @@ def scan_pure_board(f):
         f(p)
 
 
+def scan_pure_board_with_dirty(f):
+    """チェックされていない番地だけ、関数を実行します。"""
+    dirty_board = [False] * (18*18)  # 読み取ったらフラグを立てていきます。
+
+    def check(p):
+        if not dirty_board[to_addr18x18(p)]:
+            dirty_board[to_addr18x18(p)] = True  # 読取済みのチェックをします。
+            f(p)
+
+    scan_pure_board(lambda p: check(p))
+
+
 def scan_window_5x5(f, p):
     """中心を p とする 5x5 のウィンドウの各マスをイテレートして座標を返します。"""
     for pp in window_5x5:
